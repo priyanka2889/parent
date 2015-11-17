@@ -1,0 +1,131 @@
+.specialDate { background-color: violet !important; }
+.event a {
+    background-color: #42B373 !important;
+    background-image :none !important;
+    color: #ffffff !important;
+}
+
+ .ui-datepicker{
+        font-size:18px;
+        line-height: 2;
+    }
+
+
+
+
+
+				
+#dash ul {
+    width:100%;
+	list-style-type: none;
+}
+
+#dash li {
+    
+    float:left;
+    height:130px;
+    margin:0 0px 20px 0;
+    width:50%;
+	list-style-type: none;
+	margin-top:30px;
+}
+
+#dash li:nth-child(even){
+    margin-right:0;
+}
+a {
+    text-decoration: none !important;
+}
+img {max-width:100%}
+
+.ui-content .ui-listview .ui-li-divider{font-style: italic; font-size:16px;}
+				
+			.square-box{
+				position: relative;
+				width: 100%;
+				overflow: hidden;
+			  border: 1px solid gray;
+				 height: 100px;
+				 border-radius:5px;
+			}
+			.square-box:before{
+				content: "";
+				display: block;
+				padding-top: 100%;
+			}
+			.square-content{
+				position:  absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				color: white;
+			}
+			.square-content div {
+			   display: table;
+			   width: 100%;
+			   height: 100%;
+			}
+			.square-content span {
+				display: table-cell;
+				text-align: left;
+				vertical-align: left;
+				color: black
+			}
+	.ui-badge-container {
+  position: relative;
+  
+  color: #fff;
+  padding: 10px;
+  
+  height:130px;
+  
+ 
+  
+   float:left;
+    
+    margin:0 0px 20px 0;
+    width:50%;
+	list-style-type: none;
+	margin-top:30px;
+  
+}
+
+
+.badge {
+  background: #BA070F;
+  color: #fff;
+  padding: 1px 7px;
+  position: absolute;
+  right: 4px;
+  top: -2px;
+  z-index: 999;
+  border-radius: .8em;
+  border: 2px solid #fff;
+}
+#listTrash{
+  overflow: auto;
+  height:650px;
+}
+
+#unread_box{
+ overflow: auto;
+   height:650px;
+}
+
+#read_box{
+ overflow: auto;
+   height:650px;
+
+}
+
+#listinbox{
+ overflow: auto;
+  height:650px;
+}
+.hiddentext 
+ {
+	  display : none;
+}
+
+	

@@ -1,0 +1,320 @@
+<!DOCTYPE html> 
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Send msg</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+		<link rel="stylesheet"  href="css/dist/jqm-icon-pack-fa.css" />
+	    <script src="js/jquery-2.1.1.js"></script>
+		 <!---------------------date picker Css---------------------->
+	<link rel="stylesheet" href="js/jqm_dateP/jquery.mobile.datepicker.css" />
+		<link rel="stylesheet" href="js/jqm_dateP/jquery.mobile.datepicker.theme.css" />
+			<!------------------- Date picker JavaScript-------------------> 
+		<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+	<script src="js/jqm_dateP/external/jquery-ui/datepicker.js"></script>
+		
+		<script src="js/jqm/jquery.mobile-1.4.5.min.js"></script>
+		<link rel="stylesheet" href="css/validate.css"/>
+		<script src="js/jquery.validate.min.js"></script>
+		<link rel="stylesheet" href="css/pagination.css"/>
+		<script type="text/javascript" src="js/listPagination.js"></script>
+		<script type="text/javascript" src="js/jquery.alerts.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/jquery.alerts.css">
+		<script src="js/common.js"></script>
+		 <script src="js/typingevent.js"></script>
+		 	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+		<script src="js/student.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/admin_dashboard.css">
+		
+
+	</head>
+	<body>
+		<input type="hidden" id="Id" size="30" name="Id" value="" /> 
+		<input type="hidden" id="school_id" size="50" name="school_id" value="" />
+		<input type="hidden" id="usr_name" size="30" name="usr_name" value=""/> 
+		<!----DASHBOARD PAGE------>
+		<div data-role="page" id="dashboard">
+			<div data-role="header">
+				<h4>DASHBOARD</h4>
+				<a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+  			</div><!-- /header -->
+			<div role="content">
+				<ul id="dash">
+					<!--<li ><a href="#message_page" id="show_inbox"><img src="images/inbox.png" alt="Inbox" title="Messages">Messages</a></li>-->
+					<li><a href="#inbox" id="show_inbox"><div class="ui-badge-container"><img src="images/inbox.png" alt="trash" title="Trash" width="80px" height="80px">
+					<span class="badge" id="count"></span>Messages
+						
+					</div></a></li>
+					<li ><a href="#calendar_page"><img src="images/calendar.png" alt="Calendar" title="Calendar" width="80px" height="80px">Calendar</a></li>
+					<!--<li ><a href="#trash_page" id="show_trash"><img src="images/trash.png" alt="trash" title="Trash">Trash</a></li>-->
+					<li><a href="#trash" id="show_trash"><div class="ui-badge-container"><img src="images/trash.png" alt="trash" title="Trash" width="80px" height="80px">
+					<span class="badge" id="trashcount"></span>Trash
+						
+					</div></a></li>
+					<li ><a href="#school_page"><img src="images/school.png" alt="school" title="School" width="80px" height="80px"><p>About School</p></a></li>
+				</ul>
+				
+			</div><!---/CONTENT--->
+			<!-----PANEL---->
+			<div data-role="panel" id="left-panel" data-theme="b" data-display="overlay">
+				<ul data-role="listview">
+					<li data-icon="false" ><a href="#" data-rel="close" ><img src="images/user.png" alt="Profile Pic"><div id="username"></div></a></li>
+					<li data-icon="edit"><a href="#edit_profile" id="self_profile" data-rel="close" data-transition="slideup">Edit Profile</a></li>
+					<li data-icon="tag"><a href="#" data-rel="close">Change Password</a></li>	
+					<li data-icon="power"><a href="index.html" id="logout" data-ajax="false" data-rel="close" data-transition="slidedown">Log Out</a></li>	
+					<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>	
+				</ul>
+			</div><!-----/PANEL--->
+		</div>	
+		
+		<!------EDIT PROFILE PAGE------>
+		<div data-role="page" id="edit_profile">
+			<div data-role="header">
+				<h4>EDIT PROFILE</h4>
+				<a href="#dashboard" data-icon="carat-l" data-iconpos="notext" data-transition="slideup" >Close</a>
+			</div>
+			<div data-role="content">
+				<div id = 'profile'>
+					<form name="edit_profile_form" id="edit_profile_form" method="post">
+							<!-------hidden field------->
+						<input type="hidden" id="userId" size="30" name="user_id" value="1"  /> <!--hidden field ends-->
+							<fieldset class="ui-field-contain">
+								<label for="usr_name">Name</label>
+								<input type="text" id="usr_name" size="30" name="usr_name" value="" required /> 
+							</fieldset> 
+							<fieldset class="ui-field-contain">
+								<label for="usr_username">Login Name</label> 
+								<input type="text" id="usr_username" size="50" name="usr_username" value="" required />
+							</fieldset>  
+							<fieldset class="ui-field-contain">
+								<label for="usr_password">Password</label> 
+								<input type="password" id="usr_password" size="30" name="usr_password"  value="" required /> 
+							</fieldset> 	
+							<fieldset class="ui-field-contain">
+								<label for="c_password">confirm password</label> 
+								<input type="password" id="c_password" size="15" name="c_password" value="" required /> 
+							</fieldset> 
+							<fieldset class="ui-field-contain">
+								<label for="usr_email">Email</label>
+								<input type="email" id="usr_email" size="35" name="usr_email" value="" required />
+							</fieldset>
+							<fieldset class="ui-field-contain">
+								<label for="usr_registerDate">Registration date</label>
+								<label id="usr_registerDate"></label>
+							</fieldset>
+							<fieldset class="ui-field-contain">
+								<label for="usr_lastvisitDate">Last Visit date</label>
+								<label id="usr_lastvisitDate"></label>
+							</fieldset>
+							<fieldset class="ui-field-contain">
+								<input type="submit" id="update" name="update" value="Update" data-theme="b">
+							</fieldset>
+					</form><!---/EDIT PROFILE FORM ENDS----->
+				</div><!--/EDIT PROFILE ENDS -->
+			</div><!----/CONTENT--->
+		</div><!----/EDIT PROFILE PAGE--->
+		
+		<!------DASHBOARD ITEMS START----->
+		
+		<!-------MESSAGES PAGE---->
+		<div data-role="page" id="inbox">
+			<div data-role="header">
+				<h4>MESSAGES</h4>
+				<a href="#" onclick="reload();" data-icon="carat-l" data-iconpos="notext" data-transition="slideup" >Close</a>
+				<div id="" class="searchText hiddentext">
+				<input type="text" name="search" id="inbox_msg_text" value=""  placeholder="Search.." data-mini="true" data-inline="true" data-type="search" class="search" /></div>
+				<div class="ui-btn-right" ><a href="#" class="searchbtn ui-btn ui-btn-b ui-btn-inline ui-corner-all ui-icon-search ui-btn-icon-notext" >search</a>
+				</div>
+			</div>
+			 <div role="content" >
+				<ul data-role="listview" data-theme="a" data-dividertheme="a"  data-filter-theme="a" id="listinbox" class="ui-group-theme-a ui-listview">
+				</ul>					
+			</div>
+			<div data-role="footer" data-id="foo1" data-position="fixed">
+		
+				<div data-role="navbar" >
+					<ul>
+						<li><a href="#inbox"  data-transition="slide" id="show_inbox" class="ui-btn-active">All<span class="badge"id="count_mssg"></span></a></li>
+						<li><a href="#read_page" data-transition="slide" id="show_read">Read<span class="badge" id="read_count"></span></a>
+						<li><a href="#unread_page" data-transition="slide" id="show_unread">Unread<span class="badge" id="unread_count"></span></a>		
+					</ul>
+				</div> <!--/navbar -->
+			</div><!-- /footer -->
+		</div>
+		
+		<!---READ MESSAGES PAGE--->
+		<div data-role="page" id="read_page" data-title="READ MESSAGES">
+			<div data-role="header" >
+				<h1>READ MESSAGES</h1>
+					<a href="#" onclick="reload();" data-icon="carat-l" data-iconpos="notext" data-transition="slideup" >Close</a>	
+					<div id="" class="searchText hiddentext">
+				<input type="text" name="search" id="read_msg_text" value=""  placeholder="Search.." data-mini="true" data-inline="true" data-type="search" class="search" /></div>
+				<div class="ui-btn-right" ><a href="#" class="searchbtn ui-btn ui-btn-b ui-btn-inline ui-corner-all ui-icon-search ui-btn-icon-notext" >search</a>
+				</div>
+			</div>	
+			 <div role="content" >
+				<ul data-role="listview" data-theme="a" data-dividertheme="a"  data-filter-theme="a" id="read_box" class="ui-group-theme-a ui-listview">
+				</ul>
+			
+			</div>
+			<!--<div data-role="footer"  data-position="fixed" >
+				<div data-role="navbar" id="nav">
+					<ul>
+						<li><a href="#message_page"  data-transition="slide" id="show_inbox" class="ui-btn-active">All<span class="badge"id="count_mssg"></span></a></li>
+						<li><a href="#read_page" data-transition="slide" id="show_read">Read<span class="badge" id="read_count"></span></a>
+						<li><a href="#unread_page" data-transition="slide" id="show_unread">Unread<span class="badge" id="unread_count"></span></a>		
+					</ul>
+				</div><!-- /navbar 
+			</div>--><!-- /footer -->
+			
+		</div>	
+		
+		
+		<!---UNREAD MESSAGES PAGE--->
+		<div data-role="page" id="unread_page" data-title="UNREAD MESSAGES">
+			<div data-role="header" >
+				<h1>UNREAD MESSAGES</h1>
+					<a href="#" onclick="reload();" data-icon="carat-l" data-iconpos="notext" data-transition="slideup" >Close</a>
+					<div id="" class="searchText hiddentext">
+				<input type="text" name="search" id="unread_msg_text" value=""  placeholder="Search.." data-mini="true" data-inline="true" data-type="search" class="search" /></div>
+				<div class="ui-btn-right" ><a href="#" class="searchbtn ui-btn ui-btn-b ui-btn-inline ui-corner-all ui-icon-search ui-btn-icon-notext" >search</a>
+				</div>
+			</div>	
+			<div role="content">
+				<ul data-role="listview" data-theme="a" data-dividertheme="a"  data-filter-theme="a" id="unread_box" class="ui-group-theme-a ui-listview">
+				</ul>
+			</div>
+			
+		</div>	
+		
+		<!---TRASH PAGE--->
+		<div data-role="page" id="trash">
+			<div data-role="header" data-theme="b">
+				<h1>TRASH</h1>
+					<a href="#" data-icon="carat-l" title="Close" class="ui-btn-left ui-corner-all" data-iconpos="notext">Close</a>	
+					<div id="" class="searchText hiddentext">
+				<input type="text" name="search" id="trash_msg_text" value=""  placeholder="Search.." data-mini="true" data-inline="true" data-type="search" class="search" /></div>
+				<div class="ui-btn-right" ><a href="#" class="searchbtn ui-btn ui-btn-b ui-btn-inline ui-corner-all ui-icon-search ui-btn-icon-notext" >search</a>
+				</div>
+			</div>	
+			 <div role="content">
+							
+				<ul data-role="listview" data-theme="a" data-dividertheme="a" data-filter-theme="a"  id="listTrash" class="ui-group-theme-a ui-listview">
+				</ul>
+			</div>
+		</div>	
+		
+			<!----DISPLAYING MESSAGES PAGE------>
+		<div data-role="page" id="displaymsg">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h1>Messages</h1>
+				<a href="#inbox" title="Back" data-icon="carat-l" data-iconpos="notext">Back</a>
+				<a href="#" title="delete"  id="delete" class="msgdelete ui-btn ui-corner-all ui-icon-trash-o ui-btn-icon-notext">Delete</a>
+			</div>	
+			<div data-role="content">
+				<ul data-role="listview" data-theme="a" data-dividertheme="a" data-filter-theme="a"  id="read_msg" class="ui-group-theme-a ui-listview">
+				</ul>
+				<br><br>
+				<div class='square-box'>
+					<div class='square-content'>
+						<div>
+							<span id="message_cont"></span>
+						</div>
+					</div>
+					
+				</div>
+			</div><!-----/CONTENT----->	
+		</div>	
+		
+		<!----DISPLAYING MESSAGES PAGE------>
+		<div data-role="page" id="trash_displaymsg">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h1>Messages</h1>
+				<a href="#trash"   title="Back" data-icon="carat-l" data-iconpos="notext">Back</a>
+				<a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Option</a>
+				<div data-role="popup" id="popupMenu" data-theme="b">
+					<ul data-role="listview" data-inset="true" style="min-width:210px;">
+						<li data-role="list-divider">Choose an action</li>
+						<li data-icon="false"><a href="#" class="delete">Delete</a></li>
+						<li data-icon="false"><a href="#" id="restore">Restore</a></li>
+					</ul>
+				</div>
+			</div>	
+			<div data-role="content">
+				<ul data-role="listview" data-theme="a" data-dividertheme="a" data-filter-theme="a"  id="trash_read_msg" class="ui-group-theme-a ui-listview">
+				</ul>
+				<br><br>
+				<div class='square-box'>
+					<div class='square-content'>
+						<div>
+							<span id="message_cont1"></span>
+						</div>
+					</div>
+					
+				</div>
+			</div><!-----/CONTENT----->	
+			
+		</div>	
+		
+		
+		<!------SCHOOL PAGE--->
+		<div data-role="page" id="school_page">
+			<div data-role="header">
+				<h4>About School</h4>
+				<!---<a href="#dashboard" data-icon="carat-l" data-iconpos="notext" data-transition="slideup" >Close</a>-->
+				<a href="#school_panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+			</div>
+			 <div role="content" >
+				<div>
+					<img src="images/school_image.jpg" alt="why is my image not scaling" style="width:100%; height:100%;" />
+				</div>
+				<div data-role="header">
+					<h4>SCHOOL NAME</h4>
+				</div>
+				<div>
+					<img src="images/content.png" alt="why is my image not scaling" style="width:100%; height:100%;"/>
+				</div>
+				<div data-role="collapsibleset" data-theme="a" data-content-theme="a">
+				<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>I'm the collapsible content for section 1</p>
+				</div>
+				<div data-role="collapsible">
+				<h3>Section 2</h3>
+				<p>I'm the collapsible content for section 2</p>
+				</div>
+				<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>I'm the collapsible content for section 3</p>
+				</div>
+				</div>
+				
+				<!-----PANEL---->
+					<div data-role="panel" id="school_panel" data-theme="b" data-display="overlay">
+						
+					<ul data-role="listview">
+					<li></li>
+					<li data-icon="back" ><a href="#dashboard" data-rel="close" >DASHBOARD</a></li>
+					<li data-icon="edit"><a href="#" id="self_profile" data-rel="close" data-transition="slideup">Photos</a></li>
+					<li data-icon="tag"><a href="#" data-rel="close">Admission</a></li>	
+					<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>	
+					</ul>
+					</div>
+					
+			</div><!-----/CONTENT-->
+		</div><!-----/SCHOOL PAGE--->	
+		
+		
+		<div data-role="page" id="calendar_page">
+			<div data-role="header">
+				<a href="#" onclick="reload();" data-icon="carat-l" data-iconpos="notext" data-transition="slideup" >Close</a>
+				<h4>calendar</h4>
+			</div>
+			<div data-role="content">
+				<div id="datepicker"></div>
+			</div>
+		</div>
+	</body>
+
+</html>	

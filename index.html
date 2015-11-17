@@ -1,0 +1,176 @@
+<!DOCTYPE html> 
+	<html> 
+		<head> 
+			<title>School App</title> 
+				<meta name="viewport" content="width=device-width, initial-scale=1"> 
+				<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+				<script src="js/jquery-2.1.1.js"></script>
+				<script src="js/jquery.mobile-1.4.5.min.js"></script>
+				<!---------------------DATE BOX ---------------------->
+				<script type="text/javascript" src="js/datebox.js"></script>
+				<link rel="stylesheet" type="text/css" href="css/datebox.css">
+				<!--------------------VALIDATE ----------------------->
+				<script type="text/javascript" src="js/validate.js"></script>
+				<link rel="stylesheet" type="text/css" href="css/validate.css">
+				<link rel="stylesheet" href="css/pagination.css" />
+				<script type="text/javascript" src="js/listPagination.js"></script>
+				<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+				<script type="text/javascript" src="js/PushNotification.js"></script>
+				<script src="js/common.js"></script>
+				<script src="js/rc4.js"></script>
+		</head> 
+	<body> 
+	<div data-role="page" id="login_page">
+		  <div data-role="header">
+			<h1>School App</h1>
+		  </div><!-- /header -->
+			<!-----content---->
+		  <div data-role="content"> 
+		  	<form id="login" method="post">
+					<h3>Sign In</h3>
+					<label for="username">User Name</label>
+					<input type="text" name="username" id="username" value="" required />
+					<label for="txt-password">Password</label>
+					<input type="password" name="password" id="password" value="" required />
+					<input type="hidden" name="usr_usertype" id="usr_usertype" value="3" />
+					<fieldset data-role="controlgroup">
+						<input type="checkbox" name="chck-rememberme" id="chck-rememberme" checked="">
+						<label for="chck-rememberme">Remember me</label>
+					</fieldset>
+					<button type="submit" data-rel="dialog" data-transition="pop"  data-position-to="window" id="btn_submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Login</button>
+					<a href="user_registration.html" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5 " data-theme="b" data-ajax="false" >Register</a>
+					<p class="mc-top-margin-1-5"><a href="forgot_password.html" data-ajax="false">Can't access your account?</a></p>    
+				</form>
+		  </div><!-- /content -->
+
+  
+ <!------------ Commonn popup for diaplaying Messages ----------------->
+			<div id="msg" data-role="popup"class="ui-theme-b">
+				<p></p>
+				<div class="ui-grid-b">
+					<div class="ui-block-b"></div>
+					<div class="ui-block-b">
+						<a href="#list"class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-a " id="okbtn" data-rel="back">OK</a>
+					</div>
+				</div>
+			</div>
+
+       <!------------ Commonn popup for diaplaying Messages2 ----------------->
+			<div data-role="popup" id="pop_msg_reset" class="ui-content" data-theme="a">
+				<p></p>
+				<a href="#" class="ui-btn ui-corner-all ui-shadow" id="ok" onclick="$('#pop_msg').popup('close')" data-ajax="false" >OK</a>
+			</div>
+          <!------------ Commonn popup for Complete user Registration  ----------------->
+			<div id="confirm" class="ui-content" data-role="popup" data-theme="a">
+				<p id="message">Please Complete Your Registration first</p>
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<a id="yes" class="ui-btn ui-corner-all ui-mini ui-btn-a" href="#" data-ajax="false">Yes</a>
+						</div>
+						<div class="ui-block-b">
+							<a id="cancel" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
+						</div>
+					</div>
+			</div> 
+  <!----footer start---->
+		<!--	<div data-role="footer">
+				<h4> Copyright@Lewis Technologies Pvt.Ltd.</h4>
+			</div> -->
+			<!-- /footer -->
+		</div><!-- /page end -->
+	</body>
+<script>
+$(document).ready(function(){
+
+		$("#btn_submit").click(function(){
+				$( "#login" ).validate({
+					rules: {
+						username: {
+						required: true
+						},
+						password: {
+						required: true
+						}
+					},
+					errorPlacement: function( error, element ) {
+					error.insertAfter( element.parent() );
+					},
+					submitHandler: function (form) {
+/*var pass=$("#password").val();
+						var key=Math.floor((Math.random() * 100000) + 1);
+						key=key+"ABCD";
+						encrypt= rc4(key, pass);
+						//$("#password").val(encrypt);
+
+						var formData = $("#login").serialize();
+							formData=formData+"&key="+key+"&encrypt="+encrypt;*/
+						var formData = $("#login").serialize();
+							$.ajax({
+								type: "GET",
+								url:base_url+"user/create",
+								beforeSend: function() { $.mobile.loading( 'show' ) }, //Show spinner
+								complete: function() { $.mobile.loading( 'hide' ) }, //Hide spinner
+								async: 'true',
+								cache: false,
+								dataType: 'json',
+								data: formData,
+								success: onSuccess,
+								error: onError
+							});
+					}
+				});
+			});
+		function onSuccess(data)
+        {
+			if(data.status== '1')
+			{
+				localStorage.userId= data.userId;
+				localStorage.username= data.username;
+				localStorage.school_id=data.school_id;
+			/*	$("#ok").attr("href", 'parent_dashboard.html');
+				$("#pop_msg_reset").popup('open');
+				$('#pop_msg_reset p').text('Login Successfully '); */
+			}
+			else if(data.status== '0'){
+			//	alertpopup("Login Fail:Invalid Username or Password");
+				 navigator.notification.alert(
+						'Invalid Username or Password',  // message
+						 null,         // callback
+						'Login Fail:',            // title
+						'Ok'                  // buttonName
+				);
+				} 
+			else if(data.status== '2'){
+				//alertpopup("You are not registered");
+				 navigator.notification.alert(
+						'You are not registered',  // message
+						 null,         // callback
+						'Login Fail:',            // title
+						'Ok'                  // buttonName
+				);
+				}
+			else if(data.status== '3'){
+				//alertpopup("Please Check your UserType");
+				 navigator.notification.alert(
+						'Please Check your UserType',  // message
+						 null,         // callback
+						'Login Fail:',            // title
+						'Ok'                  // buttonName
+				);
+				}
+	
+         }
+         function onError(data, status)
+         {
+			//	alertpopup("Connection Error");
+			navigator.notification.alert(
+						'Connection Error',  // message
+						 null,         // callback
+						'Login Fail:',            // title
+						'Ok'                  // buttonName
+				);
+         }  
+	
+});
+</script>
+</html>

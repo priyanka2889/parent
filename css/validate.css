@@ -1,0 +1,347 @@
+label.error {
+		color: red;
+		font-size: 14px;
+		font-weight: normal;
+		line-height: 1;
+		margin-top: 0.2em;
+		width: 50%;
+		float: none;
+		background: url('images/unchecked.gif') no-repeat;
+		padding-left: 16px;
+		margin-left: .3em;
+	}
+
+	@media screen and (orientation: portrait) {
+		label.error {
+			margin-left: 0;
+			display: block;
+		}
+	}
+	@media screen and (orientation: landscape) {
+		label.error {
+			display: inline-block;
+			margin-left: 22%;
+		}
+	}
+	em {
+		color: red;
+		font-weight: bold;
+		padding-right: .25em;
+	}
+	
+	input.error { border: 1px solid red;}
+
+ .ui-listview > .ui-li-static, .ui-listview > .ui-li-divider, .ui-listview > li > a.ui-btn {
+    text-align: left;
+    white-space: unset;
+   }
+ .ui-listview > li:hover{
+  /*background-color:rgba(240, 141, 156, 0.26);*/
+   }
+  .ui-listview > li > a.ui-btn:hover{
+    /* background-color:rgba(240, 141, 156, 0.26); */
+    }
+
+.ui-listview > .ui-li-static, .ui-listview > .ui-li-divider, .ui-listview > li > a.ui-btn {
+    text-align: left;
+    white-space: unset;
+		}
+ .ui-listview > li:hover{
+  background-color:rgba(240, 141, 156, 0.26);
+  }
+  .ui-listview > li > a.ui-btn:hover{
+    background-color:rgba(240, 141, 156, 0.26);
+    }
+
+     .hidden{
+	  display:none; }
+
+@media all and (min-width: 75em) {
+	.gridlist.ui-grid-f .ui-block-b{ width: 12.5%; }
+	}
+
+.collectionlist.ui-grid-f .ui-block-b{
+width: 11.1%; 
+}
+
+@media all and (min-width: 75em) {
+	.collectionlist.ui-grid-f .ui-block-b{ width: 11.1%; }
+	}
+
+.my-breakpoint.ui-grid-f .ui-block-b{
+width: 12.5%; 
+}
+
+@media all and (min-width: 75em) {
+	.my-breakpoint.ui-grid-f .ui-block-b{ width: 12.5%; }
+	}
+
+
+
+
+#printreceipt{
+width:450px;
+height:300px;
+
+}
+#li_content{
+width:450px;
+
+font-size : 0.75em; 
+font-family : Arial;
+}
+
+
+
+.group {
+	background: transparent;
+	width:90%;
+	padding: 5px;
+	font-size: 16px;
+	line-height: 1;
+	border: 1px solid black;
+	border-radius: 0;
+	height:auto;
+	-webkit-appearance: none;
+	 font-family:helvetica-roman;
+	color:#000000;   
+	}
+
+
+.dropdown 
+{
+color: #555;
+margin: 3px -22px 0 0;
+width: 143px;
+position: relative;
+height: 17px;
+text-align:left;
+}
+.submenu
+{
+background: #fff;
+position: absolute;
+top: -12px;
+left: -20px;
+z-index: 100;
+width: 135px;
+display: none;
+margin-left: 10px;
+padding: 40px 0 5px;
+border-radius: 6px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+.dropdown li a 
+{
+color: #555555;
+display: block;
+font-family: arial;
+font-weight: bold;
+padding: 6px 15px;
+cursor: pointer;
+text-decoration:none;
+}
+
+.dropdown li a:hover
+{
+background:#155FB0;
+color: #FFFFFF;
+text-decoration: none;
+}
+a.account 
+{
+font-size: 11px;
+line-height: 16px;
+color: #555;
+position: absolute;
+z-index: 110;
+display: block;
+padding: 11px 0 0 20px;
+height: 28px;
+width: 121px;
+margin: -11px 0 0 -10px;
+text-decoration: none;
+background: url(http://lewistechnologies.in/common/css/images/arrow.png) 116px 17px no-repeat;
+cursor:pointer;
+}
+.root
+{
+list-style:none;
+margin:0px;
+padding:0px;
+font-size: 11px;
+padding: 11px 0 0 0px;
+border-top:1px solid #dedede;
+}
+.tests {
+		overflow: auto;
+		height:500px;
+		}
+.param {
+		overflow: auto;
+		height:300px;
+		}
+.editparam {
+		overflow: auto;
+		height:300px;
+		}
+.header .ui-input-search 
+		{
+			float:left;
+		}
+
+div#dailyReport .ui-block-a{
+					  border:1px solid black;
+					  padding-left:5px;
+					  }
+					div#dailyReport .ui-block-b{
+					  
+					  border:1px solid black;
+					  padding-left:5px;
+					  }
+					  div#dailyReport .ui-block-c{
+					
+					  border:1px solid black;
+					  padding-left:5px;
+					  }
+					  div#dailyReport .ui-grid-a>.ui-block-b{
+					  width:33%
+					  border:1px solid black;
+					  padding-left:5px;
+}
+
+.doctorlist {
+		overflow: auto;
+		height:400px;
+		}
+		.reportlist {
+		overflow: auto;
+		height:400px;
+		}
+		.paylist {
+		overflow: auto;
+		height:400px;
+		}
+		.apptlist {
+		overflow: auto;
+		height:400px;
+		}
+		.graphTest {
+		overflow: auto;
+		height:300px;
+		}
+		.graphTestparam {
+		overflow: auto;
+		height:400px;
+		}
+		.apptestslist {
+		overflow: auto;
+		height:200px;
+		}
+		.apptestslistedit {
+		overflow: auto;
+		height:200px;
+		}
+		.ui-content .ui-listview-inset,.ui-panel-inner>.ui-listview-inset {
+		margin: 0em 0;
+		}
+
+
+.panelsubmenu {
+		
+	  display: none;
+	  margin:0;
+	 
+	
+}
+.stdclass {
+
+		display: none;
+
+}
+
+.panellist {
+		overflow: auto;
+		height:400px;
+		}
+.userinfo{
+					width:100%;
+					overflow-y:hidden; 
+					
+		         	background-color:#E9E9E9;
+					border:1px solid black;
+				}
+
+
+				.hiddentext 
+				 {
+				  display : none;
+				}	
+				#listinbox {
+					overflow: auto;
+					height:700px;
+				}
+				#listSentmsg {
+					overflow: auto;
+					height:700px;
+				}
+			    #listDraft {
+					overflow: auto;
+				height:700px;
+				}
+			   #listTrash {
+					overflow: auto;
+					height:700px;
+				}
+
+#student_list {
+					overflow: auto;
+					height:700px;
+				}
+
+#teacher_list {
+					overflow: auto;
+					height:700px;
+				}
+
+#Schoolname_list {
+					overflow: auto;
+					height:700px;
+				}
+
+#classes_list {
+					overflow: auto;
+					height:700px;
+				}
+			   
+#Divisions_list {
+					overflow: auto;
+					height:500px;
+				}
+			   
+
+.fileinput-button {
+						position: relative;
+						overflow: hidden;
+						float: left;
+						margin-right: 4px; 
+						margin-top: -45px;
+						margin-left: 38%;
+				}
+				
+					
+			.fileinput-button input {
+					position: absolute;
+						top: 0;
+						right: 0;
+						margin: 0;
+						opacity: 0;
+						filter: alpha(opacity=0);
+						transform: translate(-300px, 0) scale(4);
+						font-size: 23px;
+						direction: ltr;
+						cursor: pointer;
+				}
+
+			   
+

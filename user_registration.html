@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+				<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+				<script src="js/jquery-2.1.1.js"></script>
+				<script src="js/jquery.mobile-1.4.5.min.js"></script>
+				<!---------------------DATE BOX ---------------------->
+				<script type="text/javascript" src="js/datebox.js"></script>
+				<link rel="stylesheet" type="text/css" href="css/datebox.css">
+				<!--------------------VALIDATE ----------------------->
+				<script type="text/javascript" src="js/validate.js"></script>
+				<link rel="stylesheet" type="text/css" href="css/validate.css">
+				<link rel="stylesheet" href="css/pagination.css" />
+				<script type="text/javascript" src="js/listPagination.js"></script>
+					<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+				<script src="js/common.js"></script>
+	</head>
+	<body>
+			<!----page start----->
+		<div data-role="page" id="p_reset">
+			<div data-role="header" >
+				<a href="index.html" data-ajax="false" data-icon="back">Home</a>
+				<h3>Student Registration</h3>
+			</div><!---header ends--->
+			<div data-role="content" class="ui-content">
+				<div id ="form_reset1">
+					<form id="chkrg" method="post">
+                       <!--------Hidden Field-------->
+						<span class="hidden">
+						<fieldset class="ui-field-contain">
+								<label for="usr_type">usrType</label>
+								<input type="hidden" id="usr_type" size="50" name="usr_type" value="3" /> 	
+						</fieldset>
+						</span>
+						<fieldset class="ui-field-contain">
+							<label for="usr_sch_id">School</label>
+							<select id = "usr_sch_id" name="usr_sch_id" size="1" required/></select>
+						</fieldset> 
+						<fieldset class="ui-field-contain">
+							<label for="usr_class_id">Class</label>
+							<select name="usr_class_id" id="usr_class_id" size="1" required></select>
+						</fieldset>
+						<fieldset class="ui-field-contain">
+							<label for="usr_div_id">Division</label>
+							<select name="usr_div_id" id="usr_div_id" size="1" required></select>
+						</fieldset>
+
+						<fieldset class="ui-field-contain">
+							<label for="usr_fullname">Student Name</label>
+							<input type="text" id="usr_name" size="50" name="usr_name" value="" required /> 
+						</fieldset> 
+						<fieldset class="ui-field-contain">
+							<label for="usr_mobile1">Roll No</label> 
+							<input type="tel" id="usr_rollno" size="15" name="usr_rollno" value="" required /> 
+						</fieldset> 
+						<input type="submit" id="chksubmit" name="submit" value="Submit" data-theme="b">
+						<input type="reset" id="chkreset" name="reset" value="Cancel" data-theme="b" >
+					</form>
+				</div>
+				<div id ="form_reset2">
+					<form id="std_rg" method="post">
+							<fieldset class="ui-field-contain">
+							<input type="hidden" id="Id" size="50" name="Id" value=""  />
+						</fieldset> 
+
+						<fieldset class="ui-field-contain">
+							<label for="usr_usrname">Username</label> 
+							<input type="text" id="usr_username" size="50" name="usr_username" value=""  />
+						</fieldset> 
+						<fieldset class="ui-field-contain">
+							<label for="usr_password">Password</label> 
+							<input type="password" id="usr_password" size="50" name="usr_password" value=""  />
+						</fieldset>
+						<fieldset class="ui-field-contain">
+							<label for="c_password">confirm password</label> 
+							<input type="password" id="c_password" size="15" name="c_password" value="" required /> 
+						</fieldset> 
+						<fieldset class="ui-field-contain">
+							<input type="submit" id="rgsubmit" name="submit" value="Submit" data-theme="b">
+							<input type="reset" id="rgreset" name="reset" value="Cancel" data-theme="b" >
+						</fieldset>
+					</form>
+				</div>
+			</div><!-- /content -->
+			<!------------ Commonn popup for diaplaying Messages ----------------->
+				<div id="msg" class="ui-content" data-role="popup" data-theme="a">
+					<p></p>
+					<a href="#list"class="ui-btn ui-corner-all ui-mini ui-btn-a" id="okbtn" data-rel="back">OK</a>
+				</div>
+			<div data-role="popup" id="pop_msg_reset" >
+				<p></p>
+				<div class="ui-grid-b">
+					<div class="ui-block-b"></div>
+					<div class="ui-block-b">
+						<a href="index.html" class="ui-btn ui-corner-all ui-shadow mc-top-margin-1-5 " id="ok" onclick="$('#pop_msg').popup('close')" data-ajax="false" >OK</a>
+					</div>
+				</div>
+			</div>
+		</div><!-- /page -->
+	<script>
+
+
+$(document).ready(function(){
+		$('#form_reset1').show();
+		$('#form_reset2').hide();
+			get_school();
+	function get_school()
+			{
+				$.ajax({
+					type : "GET",
+					url: base_url+"school",
+					cache: false,
+					dataType:'json',
+					success:set_school,
+					error:function(){alertpopup('error');}
+				});
+			}
+ 
+			function set_school(data){
+				$('select#usr_sch_id').empty(); 
+				$('select#usr_sch_id').append('<option value=""></option>');
+				$.each(data,function(i,item) {				
+				$('select#usr_sch_id').append('<option value="'+item.Id+'">'+item.sch_name+'</option>');
+				});
+ 
+			}
+
+	$("#usr_sch_id").change(function(){
+			var sch_id=$("select#usr_sch_id option:selected").attr('value');
+			$.ajax({
+				type : "GET",
+				url:base_url+"popclass/"+sch_id,
+				cache: false,
+				dataType:'json',
+				success:function(data){
+					$('select#usr_class_id').empty();
+					$('select#usr_class_id').append('<option value=""></option>');
+					$.each(data,function(i,item) {
+						$('select#usr_class_id').append('<option value="'+item.Id+'">'+item.class_name+'</option>');
+					});
+				},
+				error:function(){alertpopup('Connection error');}
+			});
+		});
+
+		$("#usr_class_id").change(function(){
+			var class_id=$("select#usr_class_id option:selected").attr('value');
+			$.ajax({
+				type : "GET",
+				url:base_url+"popdiv/"+class_id,
+				cache: false,
+				dataType:'json',
+				success:function(data){
+					if(data!="")
+					{
+					
+					$('select#usr_div_id').empty();
+					$('select#usr_div_id').append('<option value=""></option>');
+					$.each(data,function(i,item) {
+						$('select#usr_div_id').append('<option value="'+item.Id+'">'+item.div_name+'</option>');
+					});
+					} 
+					else 
+					{
+					$('select#usr_div_id').empty();
+					$('select#usr_div_id').append('<option value="0">No Division</option>');}
+				},
+				error:function(){alertpopup('Connection error');}
+			});
+		});
+	
+	
+		$("#chksubmit").click(function(){     
+			$( "#chkrg" ).validate({
+				rules: {
+					usr_sch_id:{
+						required:true
+						
+					},
+					usr_class_id: {
+						required: true
+						
+					},
+					usr_div_id: {
+						required: true
+					},
+					usr_name: {
+						required: true
+					},
+					usr_rollno: {
+						required: true,
+						digits:true
+					}
+				},
+				errorPlacement: function( error, element ) {
+					error.insertAfter( element.parent() );
+				},
+				submitHandler: function (form){
+					var formData = $("#chkrg").serialize();
+					$.ajax({
+						type: "GET",
+						url:  base_url+"checkuser",
+						cache: false,
+						dataType: 'json',
+						data: formData,
+						success: function(data){
+							if(data.status=="0")
+							{	
+							alertpopup("Please ! insert valid credentials");
+							}
+							else if (data.status=="1")
+							{
+							$('#form_reset1').hide();  
+							$('#form_reset2').show();
+							$('#form_reset2 #Id').val(data.userId);
+							} 
+							else
+							{
+								alertpopup("Already Registered");
+							}
+
+						},
+						error:function(){alertpopup("Connection error")}
+					});
+				}
+			});
+		});
+
+       //-------Check Username exist or not -----//
+		$( "#usr_username" ).blur(function() 
+		{
+			var usr_username=$("#usr_username").val();
+			
+			if (usr_username==""){
+				alertpopup("Username!");
+			}
+			else{
+				$.ajax({
+					type:"GET",
+					url:base_url+"user/"+usr_username,
+					dataType:"json",
+					success:function(data){ 
+						if(data=="1")
+						{
+							alertpopup("Username Exists");
+							$("#msg #okbtn").click(function(){
+								$("#usr_username").val("");
+							});
+						}
+					},
+					error:function(){alertpopup("error")},
+				});
+			}
+		});
+		
+		//--------reset password---------//	
+		$('#rgsubmit').click(function(){
+			$( "#std_rg" ).validate({
+				rules: {
+					usr_username:{
+					required:true
+					},
+					usr_password:{
+						minlength:4,
+						required:true
+					},
+					c_password:{
+						required:true,
+						equalTo:usr_password
+					}
+				},
+				errorPlacement: function( error, element ) {
+					error.insertAfter( element.parent() );
+				},
+				submitHandler: function (form){
+		            var formData = $("#std_rg").serialize();
+					var id=$("#Id").val();
+					$.ajax({
+						type: "POST",
+						url:  base_url+"setuser/"+id,
+						cache: false,
+						data: formData,
+						dataType:"json",
+						success: function(data){
+							if(data.status=="1")
+							{
+							$("#pop_msg_reset").popup('open');
+							$('#pop_msg_reset p').text('Register Successfully');
+							}
+							else
+							{
+								alertpopup("Please Re-Enter Credentials");
+								$("#msg #okbtn").click(function(){
+								$('#form_reset1').show();
+								$("#usr_username").val('');
+								$("#usr_password").val('');
+								$("#c_password").val('');
+								$('#form_reset2').hide();
+								});
+							}
+
+							   },
+						error: function(){alertpopup("Error");}
+					});
+				}
+			});
+		});
+	});		
+
+	</script>
+	</body>
+</html>
